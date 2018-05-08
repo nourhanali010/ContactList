@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="description" content="contact list">
+            <meta name="viewpot" content="width=device-width, initial-scale=1">
+			
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+			<link rel="stylesheet" href="./css/themes/index.css" />
+            <link rel="stylesheet" href="./css/themes/jquery.mobile.icons.min.css" />
+            <script type="text/javascript"  src="http://code.jquery.com/jquery-1.11.3.min.js">
+            </script>
+            <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js">
+            </script>      
+            <script type="text/javascript" src="./js/index.js">
+            </script>     
+            <title>contact list</title>
+            <style>
+            
+                .submit-button-div div.ui-btn{
+                        display: inline;
+                    }
+                .contact-details-div{
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+
+
+            <section data-role="page" id="contacts"> 
+
+                <header data-role="header"> <a data-role="button" data-icon="plus" style="display: inline;" href="#new-contact">Add</a> <h1>Contact list</h1></header>
+
+                <ul id="listcontact" data-role="listview" data-filter="true" data-filter-placeholder="Search Contacts..." data-inset="true">          
+
+                </ul>
+
+                <footer data-role="footer"><h1>Contact list</h1></footer>
+
+            </section>
+
+
+
+            <section data-role="page" id="new-contact"> 
+                <header data-role="header"> <a data-role="button" data-icon="carat-l" style="display: inline;" href="#contacts">Back</a> <h1>new contact</h1></header>
+                <form id="addContactForm" onsubmit="return addContact()">
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">name</label>
+                        <input type="text" name="textinput-fc" id="textinput-fc" placeholder="name"  required>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">phone</label>
+                        <input type="tel" placeholder="(201)2-55555555" id="phone" pattern="(201)[0-9]{9}" required> 
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">Email</label>
+                        <input type="email" id="email" required>  
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">gender</label>
+                        <input  type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" data-on-text="Female" data-off-text="Male" data-wrapper-class="custom-label-flipswitch">
+                    </div>
+                    <br>
+                    <div class="ui-field-contain submit-button-div" style="text-align: center;">
+                            <input data-role="button" style="display:inline;"  data-icon="check" type="submit" name="Submit" value="save" id="save">
+                            <a href="#contacts" data-role="button" data-icon="forbidden" style="display: inline;">cancel</a>
+                    </div>
+                    
+                </form>
+                <footer data-role="footer"><h1>Contact list</h1></footer>
+            </section>              
+
+
+            <section data-role="page" id="contact-details"> 
+                <header data-role="header"> <a data-role="button" data-icon="carat-l" style="display: inline;" href="#contacts">Back</a> <h1 id="contactDetialsName">Contact name</h1></header>
+                <div class="contact-details-div">
+                    <img id="contactDetialsImg" src="">
+                    <fieldset class="ui-grid-a">
+                                <a data-role="button" data-icon="delete"  href="#delete-contact" data-inline="true"  href="foo.html" data-rel="dialog" data-transition="pop"></a>
+                                <a data-role="button"  data-icon="edit" href="#" data-inline="true" onclick="goToEditContact()"></a> 
+                                <a data-role="button" data-icon="phone"  href="" id="contactDetailsPhone" data-inline="true"></a> 
+                    </fieldset>
+                </div>
+                <footer data-role="footer"><h1>Contact list</h1></footer>
+            </section>      
+     
+
+        <section data-role="dialog" id="delete-contact">
+            <h2>delete contact ?</h2>
+
+                <fieldset class="ui-grid-a">
+                         <a data-role="button"  href="#contact-details" data-inline="true" >cancel</a> 
+                         <a data-role="button"  href="#" data-inline="true" onclick="delContact()">delete</a> 
+                </fieldset>
+        </section>
+
+
+            <section data-role="page" id="edit-contact"> 
+                <header data-role="header"> <a data-role="button" data-icon="carat-l" style="display: inline;" href="#contact-details">Back</a> <h1>edit contact</h1></header>
+                <form onsubmit="return editContact()">
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">name</label>
+                        <input type="text" name="edittextinput-fc" id="edittextinput-fc" placeholder="name" value="" required>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">phone</label>
+                        <input type="phone" placeholder="(202)555-5555" name="editphone" id="editphone" required> 
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">Email</label>
+                        <input type="email" id="editemail" required>  
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="textinput-fc">gender</label>
+                        <input type="checkbox" data-role="flipswitch" name="editflip-checkbox-2" id="editflip-checkbox-2" data-on-text="Female" data-off-text="Male" data-wrapper-class="custom-label-flipswitch">
+                    </div>
+                    <br>
+                    <div class="ui-field-contain submit-button-div" style="text-align: center;">
+                            <input data-role="button" style="display:inline;"  data-icon="check" type="submit" name="Submit" value="save" id="save">
+                            <a href="#contacts" data-role="button" data-icon="forbidden" style="display: inline;">cancel</a>
+                    </div>
+                    
+                </form>
+                <footer data-role="footer"><h1>Contact list</h1></footer>
+            </section>  
+
+        </body>
+    </html>
